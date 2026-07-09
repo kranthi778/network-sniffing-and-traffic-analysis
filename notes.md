@@ -155,3 +155,201 @@ I learned a lot about network sniffing and how to protect against it.
 Network sniffing is a topic, in cybersecurity.
 
 I will keep learning about network sniffing and how to prevent it.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Part 2 – Looking at Network Traffic Using Wireshark Display Filters
+
+## Objective
+
+I want to learn how to use Wireshark display filters to look at network traffic find out which computers are talking to each other and understand what protocols are being used when I am analyzing packets.
+
+---
+
+# What are Wireshark Display Filters?
+
+Wireshark display filters help me look at the packets that I want to see without changing the traffic that I have captured.
+
+They help me get rid of information which makes it faster and easier to analyze packets when I am trying to fix a problem or investigating a security issue.
+
+---
+
+## 1. Look at Traffic by IP Address
+
+### What I Am Doing
+
+I want to see all the packets that are associated with an IP address.
+
+### Filter
+
+```text
+
+ip.addr == 192.168.31.253
+
+```
+
+### Description
+
+This filter shows me all the packets where the IP address I specified's either the source or the destination.
+
+### Screenshot
+
+![Alt text](screenshots/ip-address-filter.png)
+
+---
+
+## 2. Look at Traffic by Source IP Address
+
+### What I Am Doing
+
+I want to see packets that are sent from a computer.
+
+### Filter
+
+```text
+
+ip.src == 192.168.31.253
+
+```
+
+### Description
+
+This filter shows me the packets that come from the source IP address I specified.
+
+### Screenshot
+
+![Alt text](screenshots/source-ip-filter.png)
+
+---
+
+## 3. Look at Traffic by Destination IP Address
+
+### What I Am Doing
+
+I want to see packets that are sent to a computer.
+
+### Filter
+
+```text
+
+ip.dst == 192.168.31.253
+
+```
+
+### Description
+
+This filter shows me the packets that are going to the destination IP address I specified.
+
+### Screenshot
+
+![Alt text](screenshots/destination-ip-filter.png)
+
+---
+
+## 4. Look at Traffic by TCP Port
+
+### What I Am Doing
+
+I want to see packets that are using a TCP port.
+
+### Filter
+
+```text
+
+tcp.port == 80
+
+```
+
+### Description
+
+This filter shows me all the packets that are using the TCP port I specified which helps me find traffic that is associated with a network service.
+
+### Screenshot
+
+![Alt text](screenshots/tcp-port-80.png)
+
+---
+
+## 5. Show HTTP Requests
+
+### What I Am Doing
+
+I want to see the packets that are HTTP requests.
+
+### Filter
+
+```text
+
+http.request
+
+```
+
+### Description
+
+This filter shows me HTTP request packets, which makes it easier for me to analyze web traffic and understand what the client is asking for.
+
+### Screenshot
+
+![Alt text](screenshots/http-request.png)
+
+---
+
+## 6. Show DNS Queries
+
+### What I Am Doing
+
+I want to see DNS query packets.
+
+### Filter
+
+```text
+
+dns.qry.name
+
+```
+
+### Description
+
+This filter shows me DNS query packets, which helps me find out what domain names the computers on the network are asking for.
+
+### Screenshot
+
+![Alt text](screenshots/dns-query.png)
+
+---
+
+# Key Things I Learned
+
+- Wireshark Display Filters
+
+- Source IP Address
+
+- Destination IP Address
+
+- Port Filtering
+
+- HTTP Request Analysis
+
+- DNS Query Analysis
+
+- Packet Filtering
+
+- Network Traffic Analysis
+
+---
+
+# conclusion
+
+In this part I learned how to use Wireshark display filters to look at network traffic that I have captured.
+
+I learned how to find packets using source and destination IP addresses.
+
+I also learned how to filter traffic based on ports.
+
+I found out how to identify HTTP requests and DNS queries.
+
+I understand why display filters are important, for analyzing packets
+
+Wireshark display filters help security analysts look at network activity and find the traffic that's important when they are investigating a security issue.
+
+-------------------------------------
