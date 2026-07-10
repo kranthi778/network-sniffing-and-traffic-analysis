@@ -662,3 +662,205 @@ In this part I learned:
 * Why ARP Spoofing is a security threat
 
 * How SOC analysts. Investigate ARP Poisoning attacks.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Part 5 – Bettercap for Man-in-the-Middle Attack
+
+## Objective
+
+I want to learn how to use Bettercap to perform a Man-in-the-Middle attack. This involves discovering network hosts selecting a target enabling ARP spoofing and verifying network traffic using Wireshark. I will use Bettercap to perform these tasks.
+
+---
+
+# What is Bettercap?
+
+Bettercap is a tool used by people who test network security. It helps them perform Man-in-the-Middle attacks, discover networks, intercept packets and analyze networks. Bettercap is like a combination of tools including **arpspoof** but it does more things. This makes it very useful for people who test network security and do research.
+
+---
+
+# Lab Environment
+
+Here is my lab setup:
+
+- My attacker machine is Kali Linux
+
+- My victim machine is Windows 7
+
+- My network mode is Bridged Adapter
+
+- I am using these tools:
+
+Bettercap
+
+Wireshark
+
+---
+
+# 1. Starting Bettercap
+
+## What We Are Doing
+
+I am starting the Bettercap framework. This is where I can interact with Bettercap and give it commands.
+
+## Description
+
+To start Bettercap I need to use root privileges. This gives me a console where I can discover networks, spoof ARP intercept traffic and do other network security tasks.
+
+### Command
+
+```bash
+
+sudo bettercap
+
+```
+
+### Screenshot
+
+![Alt text](screenshots/bettercap-start.png)
+
+---
+
+# 2. Discovering Network Hosts
+
+## What We Are Doing
+
+I am finding devices connected to my network. This is a step before I can select a target for ARP spoofing.
+
+## Description
+
+The **net.show** command shows me all the hosts it has discovered. This includes my attacker machine, the gateway and the victim machine. I need this information to select a target.
+
+### Command
+
+```bash
+
+net.show
+
+```
+
+### Screenshot
+
+![Alt text](screenshots/host-discovery.png)
+
+---
+
+# 3. Configuring the Target
+
+## What We Are Doing
+
+I am selecting the victim machine for ARP spoofing. This is the machine I want to target with my Man-in-the-Middle attack.
+
+## Description
+
+I need to configure the victim IP address as the target for ARP spoofing. Bettercap will try to redirect the victims network traffic through my attacker machine.
+
+### Command
+
+```bash
+
+set arp.spoof.targets 10.199.206.135
+
+```
+
+I should replace the IP address with the IP address of my victim machine if it is different.
+
+### Screenshot
+
+![Alt text](screenshots/target-selection.png)
+
+---
+
+# 4. Enabling ARP Spoofing
+
+## What We Are Doing
+
+I am starting the Man-in-the-Middle attack. This is where I use ARP spoofing to position myself between the victim and the gateway.
+
+## Description
+
+The **arp.spoof on** command enables ARP spoofing. Bettercap starts sending ARP replies to get between the victim and the gateway.
+
+### Command
+
+```bash
+
+arp.spoof on
+
+```
+
+### Screenshot
+
+![Alt text](screenshots/bettercap-arp-spoof.png)
+
+---
+
+# 5. Verifying Network Traffic
+
+## What We Are Doing
+
+I am monitoring ARP traffic while Bettercap is running. This helps me verify that the Man-in-the-Middle attack is working.
+
+## Description
+
+I use Wireshark to monitor ARP packets. If I see ARP traffic it means there is active communication on the network and my attack is working.
+
+### Wireshark Display Filter
+
+```text
+
+arp
+
+```
+
+### Screenshot
+
+![Alt text](screenshots/bettercap-verification.png)
+
+---
+
+# SOC Analyst Perspective
+
+As a security analyst I need to understand how attackers use tools like Bettercap. Attackers use these techniques to perform Man-in-the-Middle attacks. I can detect these attacks by looking for signs like ARP reply packets, unexpected MAC address changes and increased ARP traffic.
+
+I can use tools like Wireshark, SIEM platforms and IDS/IPS solutions to detect and investigate these attacks. It is my job to monitor network traffic and look for behavior.
+
+---
+
+# Key Concepts Learned
+
+I learned about these concepts:
+
+- Bettercap Framework
+
+- Network Discovery
+
+- Host Enumeration
+
+- ARP Spoofing
+
+- ARP Poisoning
+
+
+- Man-in-the-Middle attack
+
+- Gateway Identification
+
+- Target Selection
+
+- Packet Analysis
+
+- Wireshark Verification
+
+- Network Monitoring
+
+---
+
+# conclusion
+
+In this part I learned 
+
+- how to use Bettercap to discover network hosts configure an ARP spoofing target initiate a Man-in-the-Middle attack and verify network traffic using Wireshark. 
+- I also learned how to detect these attacks from a security analysts perspective by monitoring ARP traffic and investigating suspicious network behavior. 
+- Bettercap is a tool for Man-, in-the-Middle attacks and network analysis.
