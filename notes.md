@@ -414,7 +414,7 @@ The Endpoints window shows me all the devices that I can see in the packet captu
 
 ### Screenshot
 
-![ text](screenshots/network-endpoints.png)
+![Alt text](screenshots/network-endpoints.png)
 
 ---
 
@@ -481,3 +481,184 @@ I learned how to analyze the conversations, between systems.
 I learned how to follow a stream. I learned how to look at the protocol headers.. 
 I learned how Wireshark helps people who are investigating network problems and responding to incidents. 
 I used Wireshark to learn about Network Conversations, Network Endpoints and TCP Streams.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Part 4 – ARP Spoofing Using arpspoof
+
+## Objective
+
+Perform an ARP Spoofing attack in a controlled lab. Verify that the attack works. Understand how security analysts find this attack.
+
+## What is ARP Spoofing?
+
+ARP helps find a devices MAC address using its IP address. ARP Spoofing is when someone sends ARP messages. This makes the victim and gateway think the attackers MAC address is the persons IP address.
+
+So all communication goes through the attackers device.
+
+## Lab Environment
+
+* Attacker: Kali Linux
+
+* Victim: Windows 7
+
+* Network Mode: Bridged Adapter
+
+* Tool Used: arpspoof
+
+## 1. Understanding ARP Spoofing
+
+### What We Are Doing
+
+We are learning how an attacker gets between the victim and gateway.
+
+## Description
+
+Normally the victim talks directly to the gateway.
+
+After ARP Spoofing:
+
+Victim → Kali Linux → Gateway
+
+All packets go through the attackers device.
+
+### Screenshot
+
+![Alt text](screenshots/arp-spoofing-overview.png)
+
+## 2. Identifying Network Information
+
+### What We Are Doing
+
+We are finding the IP addresses we need.
+
+## Description
+
+Before the attack find the IP addresses of the attacker, victim and gateway.
+
+### Kali Linux IP Address
+
+![Alt text](screenshots/kali-ip-address.png)
+
+### Windows 7 Network Configuration
+
+![Alt text](screenshots/windows7-ipconfig.png)
+
+## 3. Launching the ARP Spoofing Attack
+
+### What We Are Doing
+
+We are starting ARP Spoofing between the victim and gateway.
+
+## Description
+
+Two `arpspoof` commands are used.
+
+The first one tricks the victim.
+
+The second one tricks the gateway.
+
+Together they make a Man-in-the-Middle attack.
+
+### Spoofing the Victim
+
+![Alt text](screenshots/arpspoof-victim.png)
+
+
+### Spoofing the Gateway
+
+![Alt text](screenshots/arpspoof-gateway.png)
+
+## 4. Verifying the Attack
+
+### What We Are Doing
+
+We are checking if ARP Spoofing works.
+
+## Verification Using Wireshark
+
+Use this filter:
+
+```
+
+arp
+
+```
+
+Fake ARP replies mean ARP Spoofing is happening.
+
+### Screenshot
+
+![Alt text](screenshots/arp-poisoning-wireshark.png)
+
+## Verification Using Windows ARP Cache
+
+Run:
+
+```
+
+arp -a
+
+```
+
+If the gateway IP maps to the attackers MAC address ARP Spoofing worked.
+
+### Screenshot
+
+![Alt text](screenshots/victim-arp-cache.png)
+
+
+## SOC Analyst Perspective
+
+A SOC analyst finds ARP Spoofing by:
+
+* Many ARP replies
+
+* Same MAC addresses
+
+* Gateway MAC address changes
+
+* Arp traffic in Wireshark
+
+* Alerts from IDS/IPS or network tools
+
+Understanding this helps analysts investigate Man-in-the-Middle attacks.
+
+## Key Concepts Learned
+
+* Address Resolution Protocol (ARP)
+
+* ARP Cache
+
+* ARP Spoofing
+
+* ARP Poisoning
+
+* Man-in-the-Middle (MITM)
+
+* Gateway
+
+* MAC Address
+
+* Packet Forwarding
+
+* Wireshark
+
+* arpspoof
+
+# conclusion
+
+In this part I learned:
+
+* How ARP works
+
+* How attackers do ARP Spoofing with arpspoof
+
+* How a Man-in-the-Middle attack happens
+
+* How to verify the attack, with Wireshark and Windows ARP cache
+
+* Why ARP Spoofing is a security threat
+
+* How SOC analysts. Investigate ARP Poisoning attacks.
